@@ -17,4 +17,6 @@ public class ProductOrder {
     private int userId;
     private String userName;
 
+    private int price;
+
 }

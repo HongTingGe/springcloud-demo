@@ -5,11 +5,10 @@ import com.ght.product_service.service.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/product")
@@ -28,6 +27,19 @@ public class ProductController {
 
     @RequestMapping("/{id}")
     public Product getProductById(@PathVariable int id){
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Product product = new Product();
+        BeanUtils.copyProperties(productService.getProductById(id),product);
+        product.setName(product.getName() + " from port " + port);
+        return product;
+    }
+
+    @GetMapping("/find")
+    public Product findProductById(int id){
         Product product = new Product();
         BeanUtils.copyProperties(productService.getProductById(id),product);
         product.setName(product.getName() + " from port " + port);

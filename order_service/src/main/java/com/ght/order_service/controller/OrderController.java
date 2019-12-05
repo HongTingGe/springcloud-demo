@@ -13,10 +13,16 @@ public class OrderController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping("/save")
-    public Object save(@RequestParam("user_id") int userId,@RequestParam("product_id") int productId){
-        return productService.save(userId,productId);
+    @RequestMapping("/save1")
+    public Object saveByRibbon(@RequestParam("user_id") int userId,@RequestParam("product_id") int productId){
+        return productService.saveByRibbon(userId,productId);
     }
+
+    @RequestMapping("/save2")
+    public Object saveByFeign(@RequestParam("user_id") int userId,@RequestParam("product_id") int productId){
+        return productService.saveByFeign(userId,productId);
+    }
+
 
 
 }
