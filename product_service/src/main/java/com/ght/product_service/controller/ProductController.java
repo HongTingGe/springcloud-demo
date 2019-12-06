@@ -40,6 +40,12 @@ public class ProductController {
 
     @GetMapping("/find")
     public Product findProductById(int id){
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Product product = new Product();
         BeanUtils.copyProperties(productService.getProductById(id),product);
         product.setName(product.getName() + " from port " + port);
